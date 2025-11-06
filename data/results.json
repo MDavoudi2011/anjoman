@@ -1,0 +1,294 @@
+[
+    {
+        "name": "محمد داودی",
+        "score": 0,
+        "total": 15,
+        "answers": [
+            {
+                "q": 1,
+                "questionText": "'الگوریتم' (Algorithm) چیست؟",
+                "selectedOption": "سخت‌افزار کامپیوتر",
+                "correctOption": "مجموعه دستورالعمل‌های گام‌به‌گام برای حل مسئله",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 2,
+                "questionText": "کدام ساختار برای اجرای یک کد، *فقط* در صورتی که یک شرط خاص درست باشد، استفاده می‌شود؟",
+                "selectedOption": " 'variable '",
+                "correctOption": " 'if ' statement",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 3,
+                "questionText": "کدام گزینه یک نام متغیر معتبر در پایتون *نیست*؟",
+                "selectedOption": " 'myVar '",
+                "correctOption": " 'my-var '",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 4,
+                "questionText": "خروجی قطعه کد زیر چیست؟<pre class='bg-gray-100 p-3 rounded mt-2 text-left' dir='ltr'><code>x = 5\nif x > 5:\n    print(\"A\")\nelif x == 5:\n    print(\"B\")\nelse:\n    print(\"C\")<\/code><\/pre>",
+                "selectedOption": "A",
+                "correctOption": "B",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 5,
+                "questionText": "یک 'تابع' (Function) در برنامه‌نویسی چه کاربردی دارد؟",
+                "selectedOption": "فقط برای نمایش متن در خروجی",
+                "correctOption": "برای دسته‌بندی کدها و جلوگیری از تکرار",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 6,
+                "questionText": "نوع داده  'True ' (با حرف اول بزرگ) در پایتون چیست؟",
+                "selectedOption": "Float (اعشاری)",
+                "correctOption": "Boolean (بولین)",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 7,
+                "questionText": "ایراد اصلی در قطعه کد زیر چیست؟<pre class='bg-gray-100 p-3 rounded mt-2 text-left' dir='ltr'><code>x = 10\nif x = 10:\n    print(\"Equal\")<\/code><\/pre>",
+                "selectedOption": "باید از  'elif ' استفاده می‌شد",
+                "correctOption": "استفاده از  '= ' (تخصیص) به جای  '== ' (مقایسه) در شرط",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 8,
+                "questionText": "خروجی  'print(10 \/\/ 3) ' در پایتون چیست؟ (عملگر تقسیم صحیح)",
+                "selectedOption": "3.33",
+                "correctOption": "3",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 9,
+                "questionText": "کدام گزینه بهترین تعریف برای 'متغیر' (Variable) در برنامه‌نویسی است؟",
+                "selectedOption": "یک حلقه تکرار",
+                "correctOption": "ظرفی در حافظه برای نگهداری داده",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 10,
+                "questionText": "مفهوم  'Debugging ' (خطایابی) در برنامه‌نویسی به چه معناست؟",
+                "selectedOption": "اضافه کردن قابلیت‌های جدید",
+                "correctOption": "پیدا کردن و رفع خطاها (باگ‌ها)",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 11,
+                "questionText": "خروجی  'print(10 % 3) ' در پایتون چیست؟ (عملگر باقیمانده)",
+                "selectedOption": "3.33",
+                "correctOption": "1",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 12,
+                "questionText": "حلقه  'range(1, 4) ' در پایتون چه اعدادی را به ترتیب تولید می‌کند؟",
+                "selectedOption": "0, 1, 2, 3",
+                "correctOption": "1, 2, 3",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 13,
+                "questionText": "کدام تابع برای دریافت ورودی متنی از کاربر در پایتون استفاده می‌شود؟",
+                "selectedOption": " 'print() '",
+                "correctOption": " 'input() '",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 14,
+                "questionText": "برای افزودن یک آیتم به *انتهای* یک لیست (List) در پایتون از کدام متد استفاده می‌شود؟",
+                "selectedOption": " 'insert() '",
+                "correctOption": " 'append() '",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 15,
+                "questionText": "خروجی <pre class='bg-gray-100 p-2 rounded text-left' dir='ltr'><code>print(\"Python\"[1:4])<\/code><\/pre> چیست؟ (Slicing)",
+                "selectedOption": "'Pyth'",
+                "correctOption": "'yth'",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            }
+        ],
+        "cheated": false,
+        "cheatCount": 0,
+        "timestamp": "2025-11-05 22:53:47",
+        "ip": "::1"
+    },
+    {
+        "name": "محمد داودی 2",
+        "score": 5,
+        "total": 15,
+        "answers": [
+            {
+                "q": 1,
+                "questionText": "خروجی  'print(10 % 3) ' در پایتون چیست؟ (عملگر باقیمانده)",
+                "selectedOption": "3",
+                "correctOption": "1",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 2,
+                "questionText": "'الگوریتم' (Algorithm) چیست؟",
+                "selectedOption": "نام یک زبان برنامه‌نویسی",
+                "correctOption": "مجموعه دستورالعمل‌های گام‌به‌گام برای حل مسئله",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 3,
+                "questionText": "کدام گزینه بهترین تعریف برای 'متغیر' (Variable) در برنامه‌نویسی است؟",
+                "selectedOption": "ظرفی در حافظه برای نگهداری داده",
+                "correctOption": "ظرفی در حافظه برای نگهداری داده",
+                "correct": true,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 4,
+                "questionText": "خروجی  'print(10 \/\/ 3) ' در پایتون چیست؟ (عملگر تقسیم صحیح)",
+                "selectedOption": "3.0",
+                "correctOption": "3",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 5,
+                "questionText": "خروجی <pre class='bg-gray-100 p-2 rounded text-left' dir='ltr'><code>print(\"Python\"[1:4])<\/code><\/pre> چیست؟ (Slicing)",
+                "selectedOption": "'yth'",
+                "correctOption": "'yth'",
+                "correct": true,
+                "timeUsed": 1,
+                "timedOut": false
+            },
+            {
+                "q": 6,
+                "questionText": "حلقه  'range(1, 4) ' در پایتون چه اعدادی را به ترتیب تولید می‌کند؟",
+                "selectedOption": "0, 1, 2, 3",
+                "correctOption": "1, 2, 3",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 7,
+                "questionText": "کدام تابع برای دریافت ورودی متنی از کاربر در پایتون استفاده می‌شود؟",
+                "selectedOption": " 'input() '",
+                "correctOption": " 'input() '",
+                "correct": true,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 8,
+                "questionText": "خروجی قطعه کد زیر چیست؟<pre class='bg-gray-100 p-3 rounded mt-2 text-left' dir='ltr'><code>x = 5\nif x > 5:\n    print(\"A\")\nelif x == 5:\n    print(\"B\")\nelse:\n    print(\"C\")<\/code><\/pre>",
+                "selectedOption": "B",
+                "correctOption": "B",
+                "correct": true,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 9,
+                "questionText": "کدام ساختار برای اجرای یک کد، *فقط* در صورتی که یک شرط خاص درست باشد، استفاده می‌شود؟",
+                "selectedOption": " 'for ' loop",
+                "correctOption": " 'if ' statement",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 10,
+                "questionText": "نوع داده  'True ' (با حرف اول بزرگ) در پایتون چیست؟",
+                "selectedOption": "String (رشته)",
+                "correctOption": "Boolean (بولین)",
+                "correct": false,
+                "timeUsed": 3,
+                "timedOut": false
+            },
+            {
+                "q": 11,
+                "questionText": "ایراد اصلی در قطعه کد زیر چیست؟<pre class='bg-gray-100 p-3 rounded mt-2 text-left' dir='ltr'><code>x = 10\nif x = 10:\n    print(\"Equal\")<\/code><\/pre>",
+                "selectedOption": "استفاده از  'print ' اشتباه است",
+                "correctOption": "استفاده از  '= ' (تخصیص) به جای  '== ' (مقایسه) در شرط",
+                "correct": false,
+                "timeUsed": 3,
+                "timedOut": false
+            },
+            {
+                "q": 12,
+                "questionText": "برای افزودن یک آیتم به *انتهای* یک لیست (List) در پایتون از کدام متد استفاده می‌شود؟",
+                "selectedOption": " 'append() '",
+                "correctOption": " 'append() '",
+                "correct": true,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 13,
+                "questionText": "یک 'تابع' (Function) در برنامه‌نویسی چه کاربردی دارد؟",
+                "selectedOption": "فقط برای نمایش متن در خروجی",
+                "correctOption": "برای دسته‌بندی کدها و جلوگیری از تکرار",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            },
+            {
+                "q": 14,
+                "questionText": "مفهوم  'Debugging ' (خطایابی) در برنامه‌نویسی به چه معناست؟",
+                "selectedOption": "کامنت‌گذاری کد",
+                "correctOption": "پیدا کردن و رفع خطاها (باگ‌ها)",
+                "correct": false,
+                "timeUsed": 3,
+                "timedOut": false
+            },
+            {
+                "q": 15,
+                "questionText": "کدام گزینه یک نام متغیر معتبر در پایتون *نیست*؟",
+                "selectedOption": " 'my_var '",
+                "correctOption": " 'my-var '",
+                "correct": false,
+                "timeUsed": 0,
+                "timedOut": false
+            }
+        ],
+        "cheated": false,
+        "cheatCount": 0,
+        "timestamp": "2025-11-05 22:57:31",
+        "ip": "::1"
+    }
+]

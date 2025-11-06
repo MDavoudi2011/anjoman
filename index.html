@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آزمون تعیین سطح برنامه‌نویسی</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool'></script>
+
+    <style>
+        body, * { font-family: 'Vazirmatn', sans-serif !important; }
+        .no-select { user-select: none; }
+
+        /* پترن پس‌زمینه ظریف */
+        body {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM38.59 0l-2.83 2.83 1.41 1.41L40 1.41V0h-1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            transition: background-color 0.3s ease;
+        }
+
+        /* انیمیشن محو شدن برای ورود کارت‌ها */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card-animated {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        
+        /* مخفی کردن با انیمیشن (اگر نیاز شد) */
+        .fade-out {
+            animation: fadeOut 0.3s ease-out forwards;
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; display: none; }
+        }
+    </style>
+</head>
+<body class="no-select bg-base-200" oncontextmenu="return false;">
+
+    <label class="swap swap-rotate fixed top-4 right-4 z-50 btn btn-circle btn-ghost">
+        <input type="checkbox" id="theme-toggle" />
+        <svg class="swap-on fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41a1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29a1,1,0,0,0,.71-.29a1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0a1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>
+        <svg class="swap-off fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36A10.14,10.14,0,1,0,22,14.05A1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/></svg>
+    </label>
+
+    <div class="min-h-screen flex items-center justify-center p-4">
+
+        <div id="step-1-login" class="card-animated card w-full max-w-lg bg-base-100 shadow-2xl p-8 border border-base-300">
+            <h1 class="text-3xl font-bold text-primary text-center mb-4">به آزمون خوش آمدید!</h1>
+            <p class="text-center text-base-content/70 mb-6">برای شروع، لطفا نام خود را وارد کنید.</p>
+            
+            <div class="form-control w-full">
+                <label class="label">
+                    <span class="label-text">نام و نام خانوادگی</span>
+                </label>
+                <input id="user-name-input" type="text" placeholder="نام و نام خانوادگی خود را وارد نمایید..." class="input input-bordered w-full input-lg" onkeyup="if(event.key==='Enter') startInstructions()" />
+                <label class="label">
+                    <span id="name-error" class="label-text-alt text-error"></span>
+                </label>
+            </div>
+
+            <button onclick="startInstructions()" class="btn btn-primary btn-lg w-full mt-4">
+                ادامه
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg>
+            </button>
+        </div>
+
+        <div id="step-2-instructions" class="card-animated card w-full max-w-2xl bg-base-100 shadow-2xl p-8 hidden border border-base-300">
+            <h1 class="text-3xl font-bold text-primary text-center mb-6">قوانین و راهنمای آزمون</h1>
+            
+            <div class="space-y-4 text-base-content/90 mb-8">
+                <div class="flex items-center gap-3 p-3 bg-base-200 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-info"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h3.75" /></svg>
+                    <span>تعداد کل سوالات: <b id="total-q-count-rules" class="text-primary">0</b></span>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-base-200 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-error"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                    <span>زمان پاسخگویی به هر سوال: <b class="text-error font-bold">60 ثانیه</b></span>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-base-200 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-warning"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg>
+                    <span>خروج از صفحه (تغییر تب) به منزله تقلب است. (بار اول اخطار، بار دوم پایان آزمون)</span>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-base-200 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-success"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                    <span>خروج از حالت تمام‌صفحه (Fullscreen) مجاز نیست و به صورت خودکار بازگردانده می‌شوید.</span>
+                </div>
+            </div>
+
+            <button onclick="startQuiz()" class="btn btn-success btn-lg w-full gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" /></svg>
+                متوجه شدم، شروع آزمون
+            </button>
+        </div>
+
+        <div id="quiz-container" class="card-animated card w-full max-w-3xl bg-base-100 shadow-2xl p-8 hidden border border-base-300">
+            <div id="quiz-header" class="mb-6">
+                <h1 class="text-3xl font-bold text-primary text-center mb-4">سوال <span id="current-q-index">1</span> از <span id="total-q-count">?</span></h1>
+                <div class="tooltip w-full" data-tip="پیشرفت کلی آزمون">
+                    <progress id="overall-progress" class="progress progress-primary w-full" value="0" max="100"></progress>
+                </div>
+            </div>
+
+            <div id="quiz-area">
+                <div class="flex justify-between items-center mb-2">
+                    <span id="time-left-text" class="badge badge-lg badge-error font-bold">زمان: ۶۰ ثانیه</span>
+                </div>
+                <div class="tooltip w-full" data-tip="زمان باقیمانده این سوال">
+                    <progress id="timer-progress" class="progress progress-error w-full h-3" value="100" max="100"></progress>
+                </div>
+
+                <div class="p-6 bg-base-200 rounded-xl my-6 border-r-4 border-primary shadow-inner">
+                    <p id="question-text" class="text-xl font-bold text-base-content leading-relaxed">در حال بارگذاری...</p>
+                </div>
+
+                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    </div>
+            </div>
+
+            <div id="result-area" class="text-center hidden">
+                <div class="p-10">
+                    <h1 class="text-5xl font-bold text-success mb-6 animate-bounce">آزمون با موفقیت ثبت شد!</h1>
+                    <p class="text-2xl mb-4"><b id="final-user-name"></b> عزیز</p>
+                    <p class="text-lg text-base-content/80 mb-8">نتایج شما با موفقیت در سیستم ذخیره شد. منتظر اعلام نتایج بمانید.</p>
+                </div>
+            </div>
+        </div>
+
+        <dialog id="already-submitted-modal" class="modal">
+            <div class="modal-box border-t-4 border-error">
+                <h3 class="font-bold text-2xl text-error flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" /></svg>
+                    شما قبلاً آزمون دادید!
+                </h3>
+                <p class="py-4">هر کاربر فقط یک بار می‌تواند با یک نام در آزمون شرکت کند.</p>
+                <div class="modal-action">
+                    <button class="btn btn-error" onclick="this.closest('dialog').close()">متوجه شدم</button>
+                </div>
+            </div>
+        </dialog>
+    </div>
+
+    <dialog id="warning_modal" class="modal">
+        <div class="modal-box bg-warning/20 border border-warning">
+            <h3 class="font-bold text-lg text-warning flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg>
+                اخطار اول!
+            </h3>
+            <p class="py-4">شما یک بار از صفحه آزمون خارج شدید. در صورت تکرار، آزمون شما به دلیل تقلب متوقف خواهد شد.</p>
+            <div class="modal-action">
+                <form method="dialog">
+                    <button class="btn btn-warning" onclick="resumeTimer()">متوجه شدم و ادامه می‌دهم</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog id="cheat_modal" class="modal">
+        <div class="modal-box bg-error/20 border border-error">
+            <h3 class="font-bold text-lg text-error flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" /></svg>
+                تقلب شناسایی شد!
+            </h3>
+            <p class="py-4">به دلیل خروج مکرر از صفحه، آزمون شما متوقف و نتیجه فعلی ثبت گردید.</p>
+            <div class="modal-action">
+                <form method="dialog">
+                    <button class="btn btn-error" onclick="showResults()">مشاهده نتیجه</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog id="fullscreen_modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <h3 class="font-bold text-lg flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75v4.5m0-4.5h-4.5m4.5 0L15 9m5.25 11.25v-4.5m0 4.5h-4.5m4.5 0L15 15" /></svg>
+                ورود به حالت تمام‌صفحه
+            </h3>
+            <p class="py-4">برای جلوگیری از تقلب و تمرکز کامل، آزمون در حالت تمام‌صفحه (Fullscreen) اجرا می‌شود. لطفاً دکمه زیر را بزنید.</p>
+            <div class="modal-action">
+                <button id="enter-fullscreen" class="btn btn-success">ورود به تمام‌صفحه</button>
+            </div>
+        </div>
+    </dialog>
+
+    <footer class="footer footer-center p-4 bg-base-300 text-base-content fixed bottom-0">
+        <aside>
+            <p>ساخته شده توسط محمدامین مدنی و محمد داودی</p>
+        </aside>
+    </footer>
+
+    <script>
+        // آبجکت سوالات و متغیرهای وضعیت
+        let questions = [], questionsLoaded = false;
+        let currentQuestionIndex = 0, timeLeft = 60, maxTime = 60, timer;
+        let isQuizActive = false, userName = "", cheatAttempts = 0, timerPaused = false;
+        let hasSubmitted = false;
+        let answersLog = []; // { q: 1, correct: true, timeUsed: 15 }
+
+        // دسترسی سریع به عناصر DOM
+        const els = {
+            step1: document.getElementById('step-1-login'),
+            step2: document.getElementById('step-2-instructions'),
+            quiz: document.getElementById('quiz-container'),
+            nameInput: document.getElementById('user-name-input'),
+            nameError: document.getElementById('name-error'),
+            qText: document.getElementById('question-text'),
+            options: document.getElementById('options-container'),
+            currentQ: document.getElementById('current-q-index'),
+            totalQ: document.getElementById('total-q-count'),
+            totalRules: document.getElementById('total-q-count-rules'),
+            timeText: document.getElementById('time-left-text'),
+            timerBar: document.getElementById('timer-progress'),
+            overallBar: document.getElementById('overall-progress'),
+            quizArea: document.getElementById('quiz-area'),
+            quizHeader: document.getElementById('quiz-header'),
+            resultArea: document.getElementById('result-area'),
+            finalName: document.getElementById('final-user-name'),
+            warningModal: document.getElementById('warning_modal'),
+            cheatModal: document.getElementById('cheat_modal'),
+            fullscreenModal: document.getElementById('fullscreen_modal'),
+            alreadySubmittedModal: document.getElementById('already-submitted-modal')
+        };
+
+        // تابع مدیریت نمایش مراحل
+        function showStep(n) {
+            [els.step1, els.step2, els.quiz].forEach(el => el.classList.add('hidden'));
+            let elToShow;
+            if (n === 1) elToShow = els.step1;
+            if (n === 2) elToShow = els.step2;
+            if (n === 3) elToShow = els.quiz;
+            
+            if (elToShow) {
+                elToShow.classList.remove('hidden');
+                // ریست انیمیشن
+                elToShow.classList.remove('card-animated');
+                void elToShow.offsetWidth; // (reflow)
+                elToShow.classList.add('card-animated');
+            }
+        }
+
+        // تابع بر زدن آرایه (برای سوالات و گزینه‌ها)
+        function shuffle(arr) { return arr.sort(() => Math.random() - 0.5); }
+
+        // مرحله ۱: ورود نام
+        function startInstructions() {
+            userName = els.nameInput.value.trim();
+            if (userName.length < 3) {
+                els.nameInput.classList.add('input-error');
+                return els.nameError.textContent = "نام باید حداقل ۳ حرف داشته باشد.";
+            }
+            // بررسی اینکه آیا کاربر قبلا آزمون داده
+            const saved = localStorage.getItem('quiz_user_' + userName);
+            if (saved) {
+                els.alreadySubmittedModal.showModal();
+                return;
+            }
+            els.nameInput.classList.remove('input-error');
+            els.nameError.textContent = "";
+            els.totalRules.textContent = questions.length; // نمایش تعداد سوالات در قوانین
+            showStep(2);
+        }
+
+        // مرحله ۲: شروع آزمون
+        function startQuiz() {
+            if (!questionsLoaded) return alert("خطا: سوالات هنوز بارگذاری نشده‌اند. لطفاً لحظاتی دیگر تلاش کنید.");
+            isQuizActive = true; cheatAttempts = 0; answersLog = [];
+
+            // بر زدن سوالات
+            shuffle(questions);
+            
+            // بر زدن گزینه‌های هر سوال و آپدیت کردن ایندکس جواب صحیح
+            questions.forEach(q => {
+                const correctOptionText = q.options[q.answer - 1];
+                shuffle(q.options);
+                q.answer = q.options.indexOf(correctOptionText) + 1;
+            });
+
+            showStep(3);
+            els.fullscreenModal.showModal(); // درخواست ورود به حالت تمام‌صفحه
+        }
+
+        // ورود به حالت تمام‌صفحه
+        document.getElementById('enter-fullscreen').onclick = enterFullscreen;
+        function enterFullscreen() {
+            document.documentElement.requestFullscreen().catch((err) => {
+                console.warn("خطا در ورود به تمام‌صفحه:", err);
+            });
+            els.fullscreenModal.close();
+            loadQuestion(); // اولین سوال را پس از بستن مودال لود کن
+        }
+
+        // مانیتور کردن خروج از تمام‌صفحه
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement && isQuizActive) {
+                // اگر کاربر خارج شد، فورا او را برگردان
+                setTimeout(enterFullscreen, 300);
+            }
+        });
+
+        // بارگذاری سوال
+        function loadQuestion() {
+            if (currentQuestionIndex >= questions.length) {
+                return showResults(); // اتمام آزمون
+            }
+            
+            // آپدیت نوار پیشرفت کلی و شماره سوال
+            els.currentQ.textContent = currentQuestionIndex + 1;
+            els.totalQ.textContent = questions.length;
+            els.overallBar.value = ((currentQuestionIndex + 1) / questions.length) * 100;
+
+            const q = questions[currentQuestionIndex];
+            els.qText.innerHTML = q.question; // استفاده از innerHTML برای رندر تگ‌ها (مثل <pre>)
+            els.options.innerHTML = ''; // خالی کردن گزینه‌های قبلی
+
+            // ساخت دکمه‌های گزینه‌ها
+            q.options.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                // کلاس‌های دیزی و استایل دکمه
+                btn.className = 'btn btn-outline btn-lg w-full text-lg justify-start transition-all duration-300';
+                btn.innerHTML = opt; // استفاده از innerHTML برای رندر تگ‌ها
+                btn.onclick = () => checkAnswer(i + 1);
+                els.options.appendChild(btn);
+            });
+
+            timeLeft = maxTime; // ریست زمان
+            updateTimerDisplay();
+            timerPaused = false; // اطمینان از عدم توقف تایمر
+            startTimer();
+        }
+
+        // شروع تایمر سوال
+        function startTimer() {
+            clearInterval(timer); // پاک کردن تایمر قبلی
+            timer = setInterval(() => {
+                if (timerPaused) return; // اگر دستی متوقف شده، کاری نکن
+
+                timeLeft--;
+                updateTimerDisplay();
+
+                // پخش صدای هشدار در ۱۰ ثانیه پایانی
+                if (timeLeft <= 10 && timeLeft > 0) {
+                    new Audio('https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3').play().catch(() => {});
+                }
+
+                // اتمام زمان
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    // ثبت جواب به عنوان غلط (چون زمان تمام شده)
+                    answersLog.push({ q: currentQuestionIndex + 1, correct: false, timeUsed: maxTime, timedOut: true });
+                    nextQuestion();
+                }
+            }, 1000);
+        }
+
+        // آپدیت نمایشگر تایمر (متن و نوار)
+        function updateTimerDisplay() {
+            els.timeText.textContent = `زمان: ${timeLeft} ثانیه`;
+            els.timerBar.value = (timeLeft / maxTime) * 100;
+            // افکت چشمک‌زن در زمان کم
+            els.timeText.className = timeLeft <= 10 ? 'badge badge-lg badge-error font-bold animate-pulse' : 'badge badge-lg badge-error font-bold';
+        }
+
+        // توابع توقف و ادامه تایمر (برای مودال اخطار)
+        function pauseTimer() { clearInterval(timer); timerPaused = true; }
+        function resumeTimer() {
+            if (!timerPaused || !isQuizActive) return;
+            timerPaused = false;
+            startTimer(); // تایمر را از نو شروع کن
+        }
+
+        // بررسی جواب کاربر (تغییر یافته برای بازخورد بصری)
+        function checkAnswer(selected) {
+            clearInterval(timer); // توقف تایمر
+            const q = questions[currentQuestionIndex];
+            const correct = selected === q.answer;
+            const correctIndex = q.answer - 1; // ایندکس گزینه صحیح (مبتنی بر صفر)
+
+            // ثبت لاگ
+            answersLog.push({
+                q: currentQuestionIndex + 1,
+                questionText: q.question,
+                selectedOption: q.options[selected - 1],
+                correctOption: q.options[correctIndex],
+                correct,
+                timeUsed: maxTime - timeLeft,
+                timedOut: false
+            });
+
+            const buttons = els.options.querySelectorAll('button');
+            buttons.forEach(btn => btn.disabled = true); // غیرفعال کردن همه گزینه‌ها
+
+            // اعمال بازخورد بصری
+            if (correct) {
+                buttons[selected - 1].classList.replace('btn-outline', 'btn-success');
+                buttons[selected - 1].classList.add('animate-pulse'); // انیمیشن پالس برای جواب صحیح
+            } else {
+                buttons[selected - 1].classList.replace('btn-outline', 'btn-error');
+                // نمایش گزینه صحیح
+                buttons[correctIndex].classList.replace('btn-outline', 'btn-success');
+            }
+
+            // انتظار برای ۱.۲ ثانیه سپس رفتن به سوال بعد
+            setTimeout(nextQuestion, 1200);
+        }
+
+        // رفتن به سوال بعدی
+        function nextQuestion() {
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        // نمایش نتایج نهایی
+        function showResults() {
+            if (!isQuizActive || hasSubmitted) return; // جلوگیری از ثبت چندباره
+            clearInterval(timer); 
+            isQuizActive = false; 
+            hasSubmitted = true;
+
+            // خروج از تمام‌صفحه در پایان
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            }
+
+            // جشن!
+            confetti({ particleCount: 200, spread: 90, origin: { y: 0.6 } });
+
+            // ذخیره در localStorage برای جلوگیری از آزمون مجدد
+            localStorage.setItem('quiz_user_' + userName, JSON.stringify({ 
+                date: new Date().toLocaleString('fa-IR'),
+                cheated: cheatAttempts >= 2 
+            }));
+
+            // نمایش صفحه نتایج
+            els.quizArea.classList.add('hidden');
+            els.quizHeader.classList.add('hidden');
+            els.resultArea.classList.remove('hidden');
+            els.finalName.textContent = userName;
+
+            // آماده‌سازی داده برای ارسال به سرور
+            const resultData = {
+                name: userName,
+                answers: answersLog,
+                cheated: cheatAttempts >= 2,
+                cheatCount: cheatAttempts,
+                totalQuestions: questions.length,
+                submittedAt: new Date().toISOString()
+            };
+
+            // ارسال نتایج به API
+            fetch('api/save_result.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(resultData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('نتیجه با موفقیت ثبت شد:', data);
+            })
+            .catch((error) => {
+                console.error('خطا در ثبت نتیجه:', error);
+                // اینجا می‌توان یک پیام خطا به کاربر نشان داد که نتایج به سرور نرسیده
+            });
+        }
+
+        // مانیتور کردن تغییر تب (ضد تقلب)
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden && isQuizActive) {
+                // اگر کاربر تب را عوض کرد
+                pauseTimer();
+                cheatAttempts++;
+                if (cheatAttempts >= 2) {
+                    els.cheatModal.showModal(); // نمایش مودال تقلب (پایان آزمون)
+                } else {
+                    els.warningModal.showModal(); // نمایش مودال اخطار اول
+                }
+            }
+        });
+
+        // مدیریت دکمه تغییر تم
+        document.getElementById('theme-toggle').onchange = (e) => {
+            document.documentElement.setAttribute('data-theme', e.target.checked ? 'dark' : 'light');
+        };
+
+        // بارگذاری سوالات از فایل JSON
+        fetch('questions.json')
+            .then(r => {
+                if (!r.ok) throw new Error(`فایل questions.json پیدا نشد (${r.status})`);
+                return r.json();
+            })
+            .then(data => {
+                questions = data;
+                questionsLoaded = true;
+                els.totalRules.textContent = questions.length; // آپدیت تعداد سوالات در قوانین
+            })
+            .catch((err) => {
+                console.error(err);
+                alert("خطا در بارگذاری سوالات. لطفاً صفحه را رفرش کنید.");
+            });
+
+        // نمایش مرحله اول (ورود) پس از بارگذاری کامل صفحه
+        window.onload = () => showStep(1);
+    </script>
+</body>
+</html>
