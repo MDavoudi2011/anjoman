@@ -1,0 +1,27 @@
+
+[
+  {
+    "username": "userA",
+    "password": "passwordA",
+    "group": "A",
+    "watchedVideos": [
+      "a_py_1"
+    ]
+  },
+  {
+    "username": "userB",
+    "password": "passwordB",
+    "group": "B",
+    "watchedVideos": []
+  },
+  {
+    "username": "test",
+    "password": "test",
+    "group": "A",
+    "watchedVideos": [
+      "a_py_1",
+      "a_py_2",
+      "a_web_1"
+    ]
+  }
+]
