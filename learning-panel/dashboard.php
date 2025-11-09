@@ -150,8 +150,8 @@ $nav_items = [
     <!-- Footer -->
     <footer class="pb-20 pt-8 text-center text-gray-600 dark:text-gray-400 text-sm">
         <div class="container mx-auto px-4">
-            <p class="font-medium">طراحی توسط محمد داوودی و محمد امین مدنی</p>
-            <p class="mt-1 text-xs">© 2025 انجمن برنامه نویسی باهنر ۳</p>
+            <p class="font-medium">طراحی توسط محمد داودی و محمد امین مدنی</p>
+            <p class="mt-1 text-xs">انجمن برنامه نویسی باهنر ۳</p>
         </div>
     </footer>
 
