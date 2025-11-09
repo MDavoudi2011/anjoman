@@ -32,9 +32,7 @@ $nav_items = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>داشبورد - پلتفرم آموزشی</title>
-    <!-- فونت وزیرمتن -->
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -59,7 +57,6 @@ $nav_items = [
 </head>
 <body class="bg-gray-100 dark:bg-gray-900">
 
-    <!-- این بخش معادل MainLayout.tsx (هدر) است -->
     <div class="flex flex-col min-h-screen font-sans text-gray-900 bg-gray-100 dark:bg-gray-900 dark:text-gray-200">
       <header class="fixed top-0 left-0 right-0 z-20 flex items-center justify-between p-4 bg-white shadow-md dark:bg-gray-800">
         <h1 class="text-xl font-bold text-indigo-600 dark:text-indigo-400">
@@ -105,7 +102,6 @@ $nav_items = [
         </div>
       </main>
       
-      <!-- این بخش معادل BottomNav.tsx است -->
       <nav class="fixed bottom-0 left-0 right-0 z-10 grid grid-cols-3 bg-white border-t border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700">
         <?php foreach ($nav_items as $view_name => $item):
             $is_active = ($view == $view_name);
@@ -123,13 +119,8 @@ $nav_items = [
           </a>
         <?php endforeach; ?>
       </nav>
-      <!-- پایان BottomNav.tsx -->
-    </div>
+      </div>
 
-    <!-- 
-    جاوا اسکریپت برای مودال‌ها
-    این کد به دکمه‌ها در ویوهای training و practice گوش می‌دهد
-    -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
@@ -162,10 +153,11 @@ $nav_items = [
                 });
             }
 
+            // --- مدیریت مودال ویدئو (Video Modal) ---
             const videoModal = document.getElementById('video-player-modal');
             if (videoModal) {
                 const videoTitle = videoModal.querySelector('#video-modal-title');
-                const videoPlayer = videoModal.querySelector('#video-modal-player'); // به جای videoImage
+                const videoPlayer = videoModal.querySelector('#video-modal-player');
                 const closeButton = videoModal.querySelector('[data-close-modal]');
                 let currentVideoId = null;
                 let currentCardElement = null; // نگه‌داشتن کارت برای آپدیت UI
@@ -191,8 +183,16 @@ $nav_items = [
                         videoModal.classList.remove('hidden');
                         videoModal.classList.add('flex');
                         
-                        // شروع پخش واقعی
-                        videoPlayer.play();
+                        // --- فیکس شماره ۱: مدیریت خطای Autoplay ---
+                        // تلاش برای پخش واقعی
+                        const playPromise = videoPlayer.play();
+                        if (playPromise !== undefined) {
+                            playPromise.catch(error => {
+                                // پخش خودکار توسط مرورگر مسدود شد
+                                // مشکلی نیست، چون دکمه 'controls' وجود دارد و کاربر خودش می‌تواند پلی کند
+                                console.warn('Autoplay was blocked by the browser:', error);
+                            });
+                        }
                     });
                 });
                 
@@ -204,35 +204,43 @@ $nav_items = [
                 }
 
                 closeButton.addEventListener('click', closeVideoModal);
-
-            // فانکشن برای ارسال ریکوئست "دیده شدن" به سرور
-            function handleVideoWatched(videoId, cardElement) {
-                // ارسال درخواست به سرور
-                fetch('api_update_progress.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ videoId: videoId })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // آپدیت UI بدون رفرش صفحه
-                        // اضافه کردن تگ "تکمیل شد"
-                        if (!cardElement.querySelector('.watched-badge')) {
-                            const badge = document.createElement('div');
-                            badge.className = 'watched-badge absolute px-2 py-1 text-xs font-bold text-white bg-green-600 rounded-full top-2 right-2';
-                            badge.textContent = 'تکمیل شد';
-                            cardElement.querySelector('.relative').appendChild(badge);
-                        }
-                    } else {
-                        console.error('Failed to update progress on server:', data.error);
+                
+                // --- فیکس شماره ۲: اضافه کردن قابلیت بستن با کلیک روی پس‌زمینه ---
+                videoModal.addEventListener('click', (e) => {
+                    if (e.target === videoModal) {
+                        closeVideoModal();
                     }
-                })
-                .catch(error => {
-                    console.error('Error sending watch progress:', error);
                 });
+
+                // فانکشن برای ارسال ریکوئست "دیده شدن" به سرور
+                function handleVideoWatched(videoId, cardElement) {
+                    // ارسال درخواست به سرور
+                    fetch('api_update_progress.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ videoId: videoId })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // آپدیت UI بدون رفرش صفحه
+                            // اضافه کردن تگ "تکمیل شد"
+                            if (!cardElement.querySelector('.watched-badge')) {
+                                const badge = document.createElement('div');
+                                badge.className = 'watched-badge absolute px-2 py-1 text-xs font-bold text-white bg-green-600 rounded-full top-2 right-2';
+                                badge.textContent = 'تکمیل شد';
+                                cardElement.querySelector('.relative').appendChild(badge);
+                            }
+                        } else {
+                            console.error('Failed to update progress on server:', data.error);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error sending watch progress:', error);
+                    });
+                }
             }
         });
     </script>
