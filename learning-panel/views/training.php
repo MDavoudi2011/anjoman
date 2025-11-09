@@ -1,5 +1,5 @@
- 
-<?php
+<?php // Filepath: /views/training.php
+
 // $user در این فایل از dashboard.php قابل دسترس است
 
 // خواندن محتوای آموزشی
@@ -33,6 +33,7 @@ $icon_play = '<svg class="w-16 h-16 text-white opacity-70 group-hover:opacity-10
               data-id="<?php echo htmlspecialchars($video['id']); ?>"
               data-title="<?php echo htmlspecialchars($video['title']); ?>"
               data-thumbnail="<?php echo htmlspecialchars($video['thumbnailUrl']); ?>"
+              data-video-url="<?php echo htmlspecialchars($video['videoUrl']); ?>"
             >
               <div class="relative">
                 <img src="<?php echo htmlspecialchars($video['thumbnailUrl']); ?>" alt="<?php echo htmlspecialchars($video['title']); ?>" class="object-cover w-full h-40 transition-transform duration-300 group-hover:scale-105" />
@@ -84,15 +85,16 @@ $icon_play = '<svg class="w-16 h-16 text-white opacity-70 group-hover:opacity-10
           </button>
     </div>
     <div class="p-4 text-center bg-gray-900">
-        <img id="video-modal-image" src="" alt="" class="object-contain w-full mx-auto max-h-80" />
-        <p class="mt-2 text-sm text-gray-400">در حال پخش... (شبیه‌سازی)</p>
+        <!-- به جای <img> و شبیه‌سازی، تگ video واقعی -->
+        <video
+            id="video-modal-player"
+            class="w-full mx-auto max-h-80"
+            controls
+            src=""
+        >
+            مرورگر شما از تگ ویدئو پشتیبانی نمی‌کند.
+        </video>
     </div>
-    <div class="w-full bg-gray-200 dark:bg-gray-700 h-2.5">
-        <div 
-            id="video-modal-progress"
-            class="bg-indigo-600 h-2.5" 
-            style="width: 0%; transition: width 0.05s linear"
-        ></div>
-    </div>
+    <!-- نوار پیشرفت شبیه‌سازی شده حذف شد -->
   </div>
 </div>

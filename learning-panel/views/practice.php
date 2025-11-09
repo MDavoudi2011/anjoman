@@ -1,5 +1,4 @@
- 
-<?php
+<?php // Filepath: /views/practice.php
 // $user در این فایل از dashboard.php قابل دسترس است
 
 // خواندن محتوای تمرین
@@ -65,6 +64,7 @@ $difficulty_colors = [
 >
   <div
     class="relative w-full max-w-lg p-6 bg-white rounded-lg shadow-xl dark:bg-gray-800 animate-fade-in-up"
+    onclick="event.stopPropagation()"
   >
     <div class="flex items-start justify-between pb-4 border-b rounded-t dark:border-gray-600">
       <h3 id="modal-title" class="text-2xl font-semibold text-gray-900 dark:text-white">

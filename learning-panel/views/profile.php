@@ -1,5 +1,4 @@
- 
-<?php
+<?php // Filepath: /views/profile.php
 // $user در این فایل از dashboard.php قابل دسترس است
 
 // محاسبه پیشرفت

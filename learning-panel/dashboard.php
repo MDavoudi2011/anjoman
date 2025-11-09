@@ -162,61 +162,48 @@ $nav_items = [
                 });
             }
 
-            // --- مدیریت مودال ویدئو (Video Player Modal) ---
             const videoModal = document.getElementById('video-player-modal');
             if (videoModal) {
                 const videoTitle = videoModal.querySelector('#video-modal-title');
-                const videoImage = videoModal.querySelector('#video-modal-image');
-                const videoProgress = videoModal.querySelector('#video-modal-progress');
+                const videoPlayer = videoModal.querySelector('#video-modal-player'); // به جای videoImage
                 const closeButton = videoModal.querySelector('[data-close-modal]');
                 let currentVideoId = null;
-                let progressInterval = null;
+                let currentCardElement = null; // نگه‌داشتن کارت برای آپدیت UI
+
+                // گوش دادن به رویداد 'ended' ویدئو
+                videoPlayer.addEventListener('ended', () => {
+                    // ویدئو تمام شد
+                    if (currentVideoId && currentCardElement) {
+                        handleVideoWatched(currentVideoId, currentCardElement);
+                    }
+                    closeVideoModal(); // بستن مودال بعد از اتمام
+                });
 
                 document.querySelectorAll('[data-open-video-modal]').forEach(card => {
                     card.addEventListener('click', () => {
                         // پر کردن مودال
                         videoTitle.textContent = card.dataset.title;
-                        videoImage.src = card.dataset.thumbnail;
-                        videoImage.alt = card.dataset.title;
+                        videoPlayer.src = card.dataset.videoUrl; // تنظیم سورس ویدئو
                         currentVideoId = card.dataset.id;
+                        currentCardElement = card; // ذخیره کارت فعلی
 
                         // نمایش مودال
                         videoModal.classList.remove('hidden');
                         videoModal.classList.add('flex');
                         
-                        // شروع شبیه‌سازی پخش
-                        let progress = 0;
-                        videoProgress.style.width = '0%';
-                        
-                        if (progressInterval) clearInterval(progressInterval);
-
-                        progressInterval = setInterval(() => {
-                            progress += 1;
-                            videoProgress.style.width = `${progress}%`;
-                            
-                            if (progress >= 100) {
-                                clearInterval(progressInterval);
-                                // ویدئو "دیده" شد
-                                handleVideoWatched(currentVideoId, card);
-                                closeVideoModal();
-                            }
-                        }, 40); // 4 ثانیه
+                        // شروع پخش واقعی
+                        videoPlayer.play();
                     });
                 });
                 
                 const closeVideoModal = () => {
-                    if (progressInterval) clearInterval(progressInterval);
+                    videoPlayer.pause(); // توقف پخش هنگام بستن
+                    videoPlayer.src = ''; // خالی کردن سورس
                     videoModal.classList.add('hidden');
                     videoModal.classList.remove('flex');
                 }
 
                 closeButton.addEventListener('click', closeVideoModal);
-                videoModal.addEventListener('click', (e) => {
-                    if (e.target === videoModal) {
-                        closeVideoModal();
-                    }
-                });
-            }
 
             // فانکشن برای ارسال ریکوئست "دیده شدن" به سرور
             function handleVideoWatched(videoId, cardElement) {

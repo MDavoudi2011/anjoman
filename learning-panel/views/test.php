@@ -1,5 +1,4 @@
- 
-<?php
+<?php // Filepath: /views/test.php
 // $user در این فایل از dashboard.php قابل دسترس است
 
 // خواندن محتوای آزمون

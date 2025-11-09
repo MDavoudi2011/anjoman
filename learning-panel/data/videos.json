@@ -1,20 +1,19 @@
-
 {
   "A": [
     {
       "categoryTitle": "مبانی پایتون برای گروه الف",
       "videos": [
-        { "id": "a_py_1", "title": "آشنایی با پایتون", "duration": "۱۰:۳۲", "thumbnailUrl": "https://placehold.co/400x225/555/FFF?text=Python+Intro" },
-        { "id": "a_py_2", "title": "متغیرها و انواع داده", "duration": "۱۲:۴۵", "thumbnailUrl": "https://placehold.co/400x225/555/FFF?text=Variables" },
-        { "id": "a_py_3", "title": "دستورات شرطی", "duration": "۱۵:۱۰", "thumbnailUrl": "https://placehold.co/400x225/555/FFF?text=Conditions" },
-        { "id": "a_py_4", "title": "حلقه‌ها در پایتون", "duration": "۱۸:۰۵", "thumbnailUrl": "https://placehold.co/400x225/555/FFF?text=Loops" }
+        { "id": "a_py_1", "title": "آشنایی با پایتون", "duration": "۱۰:۳۲", "thumbnailUrl": "https://placehold.co/400x225/555/FFF?text=Python+Intro", "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
+        { "id": "a_py_2", "title": "متغیرها و انواع داده", "duration": "۱۲:۴۵", "thumbnailUrl": "https://placehold.co/400x225/555/FFF?text=Variables", "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+        { "id": "a_py_3", "title": "دستورات شرطی", "duration": "۱۵:۱۰", "thumbnailUrl": "https://placehold.co/400x225/555/FFF?text=Conditions", "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
+        { "id": "a_py_4", "title": "حلقه‌ها در پایتون", "duration": "۱۸:۰۵", "thumbnailUrl": "https://placehold.co/400x225/555/FFF?text=Loops", "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" }
       ]
     },
     {
       "categoryTitle": "اصول وب",
       "videos": [
-        { "id": "a_web_1", "title": "ساختار HTML", "duration": "۸:۵۰", "thumbnailUrl": "https://placehold.co/400x225/f06529/FFF?text=HTML" },
-        { "id": "a_web_2", "title": "مبانی CSS", "duration": "۱۱:۲۰", "thumbnailUrl": "https://placehold.co/400x225/2965f1/FFF?text=CSS" }
+        { "id": "a_web_1", "title": "ساختار HTML", "duration": "۸:۵۰", "thumbnailUrl": "https://placehold.co/400x225/f06529/FFF?text=HTML", "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
+        { "id": "a_web_2", "title": "مبانی CSS", "duration": "۱۱:۲۰", "thumbnailUrl": "https://placehold.co/400x225/2965f1/FFF?text=CSS", "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" }
       ]
     }
   ],
@@ -22,17 +21,17 @@
     {
       "categoryTitle": "مبانی جاوااسکریپت برای گروه ب",
       "videos": [
-        { "id": "b_js_1", "title": "اصول جاوااسکریپت", "duration": "۱۴:۰۲", "thumbnailUrl": "https://placehold.co/400x225/f7df1e/000?text=JavaScript" },
-        { "id": "b_js_2", "title": "دستکاری DOM", "duration": "۱۶:۳۰", "thumbnailUrl": "https://placehold.co/400x225/f7df1e/000?text=DOM" },
-        { "id": "b_js_3", "title": "جاوااسکریپت آسنکرون", "duration": "۲۰:۱۵", "thumbnailUrl": "https://placehold.co/400x225/f7df1e/000?text=Async+JS" },
-        { "id": "b_js_4", "title": "کار با API ها", "duration": "۲۲:۴۰", "thumbnailUrl": "https://placehold.co/400x225/f7df1e/000?text=API" }
+        { "id": "b_js_1", "title": "اصول جاوااسکریپت", "duration": "۱۴:۰۲", "thumbnailUrl": "https://placehold.co/400x225/f7df1e/000?text=JavaScript", "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
+        { "id": "b_js_2", "title": "دستکاری DOM", "duration": "۱۶:۳۰", "thumbnailUrl": "https://placehold.co/400x225/f7df1e/000?text=DOM", "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+        { "id": "b_js_3", "title": "جاوااسکریپت آسنکرون", "duration": "۲۰:۱۵", "thumbnailUrl": "https://placehold.co/400x225/f7df1e/000?text=Async+JS", "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
+        { "id": "b_js_4", "title": "کار با API ها", "duration": "۲۲:۴۰", "thumbnailUrl": "https://placehold.co/400x225/f7df1e/000?text=API", "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" }
       ]
     },
     {
       "categoryTitle": "تکنیک‌های پیشرفته استایل‌دهی",
       "videos": [
-        { "id": "b_css_1", "title": "آموزش عمیق Flexbox", "duration": "۱۳:۰۰", "thumbnailUrl": "https://placehold.co/400x225/2965f1/FFF?text=Flexbox" },
-        { "id": "b_css_2", "title": "تسلط بر CSS Grid", "duration": "۱۵:۵۵", "thumbnailUrl": "https://placehold.co/400x225/2965f1/FFF?text=CSS+Grid" }
+        { "id": "b_css_1", "title": "آموزش عمیق Flexbox", "duration": "۱۳:۰۰", "thumbnailUrl": "https://placehold.co/400x225/2965f1/FFF?text=Flexbox", "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
+        { "id": "b_css_2", "title": "تسلط بر CSS Grid", "duration": "۱۵:۵۵", "thumbnailUrl": "https://placehold.co/400x225/2965f1/FFF?text=CSS+Grid", "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" }
       ]
     }
   ]
