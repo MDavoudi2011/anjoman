@@ -1,21 +1,40 @@
 <?php // Filepath: /views/profile.php
-// $user در این فایل از dashboard.php قابل دسترس است
+// $user (از سشن) در این فایل از dashboard.php قابل دسترس است
 
-// محاسبه پیشرفت
+// --- شروع اصلاح ---
+// به جای اعتماد به سشن، اطلاعات کاربر را مستقیماً از فایل JSON (منبع حقیقت) می‌خوانیم
+// چون می‌دانیم این فایل همیشه آپدیت می‌شود.
+$users_json = @file_get_contents('data/users.json');
+$all_users = $users_json ? json_decode($users_json, true) : [];
+
+$current_user_data = $user; // استفاده از دیتای سشن به عنوان پیش‌فرض
+
+// جستجو برای پیدا کردن دیتای به‌روز شده کاربر در فایل JSON
+foreach ($all_users as $u) {
+    if ($u['username'] === $user['username'] && $u['group'] === $user['group']) {
+        $current_user_data = $u; // دیتای به‌روز شده از فایل JSON جایگزین شد
+        break;
+    }
+}
+// حالا $current_user_data حاوی تازه‌ترین اطلاعات از users.json است
+// --- پایان اصلاح ---
+
+
+// محاسبه پیشرفت با استفاده از دیتای به‌روز شده
 $videos_json = @file_get_contents('data/videos.json');
 $all_videos = $videos_json ? json_decode($videos_json, true) : [];
-$group_content = $all_videos[$user['group']] ?? [];
+$group_content = $all_videos[$current_user_data['group']] ?? [];
 
 $total_videos = 0;
 foreach ($group_content as $category) {
     $total_videos += count($category['videos']);
 }
 
-$watched_count = count($user['watchedVideos']);
+// از $current_user_data (که از JSON آمده) برای محاسبه استفاده می‌کنیم
+$watched_count = count($current_user_data['watchedVideos']);
 $completion_percentage = $total_videos > 0 ? round(($watched_count / $total_videos) * 100) : 0;
 
 ?>
-<!-- این بخش معادل ProfileView.tsx است -->
 <div class="p-6 space-y-8 bg-white rounded-lg shadow-lg dark:bg-gray-800 animate-fade-in-up">
     <h2 class="pb-2 text-3xl font-extrabold text-gray-800 border-b-4 border-indigo-500 dark:text-white">پروفایل کاربری</h2>
     
@@ -41,4 +60,3 @@ $completion_percentage = $total_videos > 0 ? round(($watched_count / $total_vide
         </div>
     </div>
 </div>
-<!-- پایان ProfileView.tsx -->
