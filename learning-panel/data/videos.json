@@ -4,17 +4,17 @@
     {
       "categoryTitle": "مبانی پایتون برای گروه الف",
       "videos": [
-        { "id": "a_py_1", "title": "آشنایی با پایتون", "duration": "۱۰:۳۲", "thumbnailUrl": "https://images.unsplash.com/photo-1555066931-4365d1469c9b?w=400&q=80" },
-        { "id": "a_py_2", "title": "متغیرها و انواع داده", "duration": "۱۲:۴۵", "thumbnailUrl": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=400&q=80" },
-        { "id": "a_py_3", "title": "دستورات شرطی", "duration": "۱۵:۱۰", "thumbnailUrl": "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=400&q=80" },
-        { "id": "a_py_4", "title": "حلقه‌ها در پایتون", "duration": "۱۸:۰۵", "thumbnailUrl": "https://images.unsplash.com/photo-1526498460520-4c246339dccb?w=400&q=80" }
+        { "id": "a_py_1", "title": "آشنایی با پایتون", "duration": "۱۰:۳۲", "thumbnailUrl": "https://placehold.co/400x225/555/FFF?text=Python+Intro" },
+        { "id": "a_py_2", "title": "متغیرها و انواع داده", "duration": "۱۲:۴۵", "thumbnailUrl": "https://placehold.co/400x225/555/FFF?text=Variables" },
+        { "id": "a_py_3", "title": "دستورات شرطی", "duration": "۱۵:۱۰", "thumbnailUrl": "https://placehold.co/400x225/555/FFF?text=Conditions" },
+        { "id": "a_py_4", "title": "حلقه‌ها در پایتون", "duration": "۱۸:۰۵", "thumbnailUrl": "https://placehold.co/400x225/555/FFF?text=Loops" }
       ]
     },
     {
       "categoryTitle": "اصول وب",
       "videos": [
-        { "id": "a_web_1", "title": "ساختار HTML", "duration": "۸:۵۰", "thumbnailUrl": "https://images.unsplash.com/photo-1621839673705-66189b39de6e?w=400&q=80" },
-        { "id": "a_web_2", "title": "مبانی CSS", "duration": "۱۱:۲۰", "thumbnailUrl": "https://images.unsplash.com/photo-1507721999472-8ed4421b4af2?w=400&q=80" }
+        { "id": "a_web_1", "title": "ساختار HTML", "duration": "۸:۵۰", "thumbnailUrl": "https://placehold.co/400x225/f06529/FFF?text=HTML" },
+        { "id": "a_web_2", "title": "مبانی CSS", "duration": "۱۱:۲۰", "thumbnailUrl": "https://placehold.co/400x225/2965f1/FFF?text=CSS" }
       ]
     }
   ],
@@ -22,17 +22,17 @@
     {
       "categoryTitle": "مبانی جاوااسکریپت برای گروه ب",
       "videos": [
-        { "id": "b_js_1", "title": "اصول جاوااسکریپت", "duration": "۱۴:۰۲", "thumbnailUrl": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=400&q=80" },
-        { "id": "b_js_2", "title": "دستکاری DOM", "duration": "۱۶:۳۰", "thumbnailUrl": "https://images.unsplash.com/photo-1618335829737-2228915674e0?w=400&q=80" },
-        { "id": "b_js_3", "title": "جاوااسکریپت آسنکرون", "duration": "۲۰:۱۵", "thumbnailUrl": "https://images.unsplash.com/photo-1579820010410-c10418a89271?w=400&q=80" },
-        { "id": "b_js_4", "title": "کار با API ها", "duration": "۲۲:۴۰", "thumbnailUrl": "https://images.unsplash.com/photo-1542820229-4b0d8a52d434?w=400&q=80" }
+        { "id": "b_js_1", "title": "اصول جاوااسکریپت", "duration": "۱۴:۰۲", "thumbnailUrl": "https://placehold.co/400x225/f7df1e/000?text=JavaScript" },
+        { "id": "b_js_2", "title": "دستکاری DOM", "duration": "۱۶:۳۰", "thumbnailUrl": "https://placehold.co/400x225/f7df1e/000?text=DOM" },
+        { "id": "b_js_3", "title": "جاوااسکریپت آسنکرون", "duration": "۲۰:۱۵", "thumbnailUrl": "https://placehold.co/400x225/f7df1e/000?text=Async+JS" },
+        { "id": "b_js_4", "title": "کار با API ها", "duration": "۲۲:۴۰", "thumbnailUrl": "https://placehold.co/400x225/f7df1e/000?text=API" }
       ]
     },
     {
       "categoryTitle": "تکنیک‌های پیشرفته استایل‌دهی",
       "videos": [
-        { "id": "b_css_1", "title": "آموزش عمیق Flexbox", "duration": "۱۳:۰۰", "thumbnailUrl": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&q=80" },
-        { "id": "b_css_2", "title": "تسلط بر CSS Grid", "duration": "۱۵:۵۵", "thumbnailUrl": "https://images.unsplash.com/photo-1605379399642-870262d3d051?w=400&q=80" }
+        { "id": "b_css_1", "title": "آموزش عمیق Flexbox", "duration": "۱۳:۰۰", "thumbnailUrl": "https://placehold.co/400x225/2965f1/FFF?text=Flexbox" },
+        { "id": "b_css_2", "title": "تسلط بر CSS Grid", "duration": "۱۵:۵۵", "thumbnailUrl": "https://placehold.co/400x225/2965f1/FFF?text=CSS+Grid" }
       ]
     }
   ]
