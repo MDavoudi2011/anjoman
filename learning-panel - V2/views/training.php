@@ -39,7 +39,6 @@ $completion_percentage = $progress['percentage'];
 ?>
 <div class="space-y-6 animate-fade-in-up">
     
-    <!-- هدر صفحه با آمار -->
     <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl shadow-xl p-6 text-white">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between">
             <div>
@@ -93,10 +92,8 @@ $completion_percentage = $progress['percentage'];
                                      alt="<?php echo htmlspecialchars($video['title']); ?>" 
                                      class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" />
                                 
-                                <!-- اورلی -->
                                 <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
                                 
-                                <!-- آیکون پلی -->
                                 <div class="absolute inset-0 flex items-center justify-center">
                                     <div class="w-16 h-16 bg-white bg-opacity-90 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform shadow-xl">
                                         <svg class="w-8 h-8 text-indigo-600 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -105,9 +102,8 @@ $completion_percentage = $progress['percentage'];
                                     </div>
                                 </div>
                                 
-                                <!-- بج تکمیل شده -->
                                 <?php if ($is_watched): ?>
-                                    <div class="watched-badge absolute px-3 py-1 text-xs font-bold text-white bg-gradient-to-r from-green-500 to-emerald-600 rounded-full top-2 right-2 shadow-lg animate-pulse">
+                                    <div class="watched-badge absolute px-3 py-1 text-xs font-bold text-white bg-gradient-to-r from-green-500 to-emerald-600 rounded-full top-2 right-2 shadow-lg">
                                         <svg class="w-3 h-3 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                         </svg>
@@ -115,7 +111,6 @@ $completion_percentage = $progress['percentage'];
                                     </div>
                                 <?php endif; ?>
                                 
-                                <!-- مدت زمان -->
                                 <div class="absolute bottom-2 left-2 px-2 py-1 bg-black bg-opacity-75 text-white text-xs font-bold rounded">
                                     <?php echo htmlspecialchars($video['duration']); ?>
                                 </div>
@@ -140,11 +135,9 @@ $completion_percentage = $progress['percentage'];
     <?php endif; ?>
 </div>
 
-<!-- مودال ویدئو -->
 <div id="video-player-modal" class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black bg-opacity-80 backdrop-blur-sm animate-fade-in">
-    <div class="relative w-full max-w-4xl bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden animate-scale-in" onclick="event.stopPropagation()">
+    <div class="relative w-full max-w-4xl bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden" onclick="event.stopPropagation()">
         
-        <!-- هدر مودال -->
         <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-indigo-500 to-purple-600">
             <h3 id="video-modal-title" class="text-xl font-bold text-white flex items-center">
                 <svg class="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -160,7 +153,6 @@ $completion_percentage = $progress['percentage'];
             </button>
         </div>
         
-        <!-- ویدئو پلیر -->
         <div class="bg-black">
             <video id="video-modal-player" class="w-full" controls style="max-height: 70vh;">
                 مرورگر شما از تگ ویدئو پشتیبانی نمی‌کند.
@@ -201,6 +193,10 @@ document.addEventListener("DOMContentLoaded", () => {
         videoPlayer.lastTime = videoPlayer.currentTime;
       });
 
+      // ==========================================================
+      // START: کد اصلاح شده
+      // ==========================================================
+      
       // وقتی ویدیو تموم شد ✅
       videoPlayer.addEventListener('ended', () => {
         // به محض تمام شدن، درخواست رو به API صحیح می‌فرستیم
@@ -225,6 +221,13 @@ document.addEventListener("DOMContentLoaded", () => {
           console.error('خطای شبکه:', error);
         });
       });
+      
+      // ==========================================================
+      // END: کد اصلاح شده
+      // ==========================================================
+
+      videoPlayer.play().catch(() => {});
+    });
   });
 
   // بستن مودال

@@ -15,6 +15,21 @@ $stmt = Config::db()->prepare("SELECT COUNT(*) FROM watched_videos WHERE user_id
 $stmt->execute([$userId]);
 $watched_count = $stmt->fetchColumn();
 
+// ==========================================================
+// START: کد اصلاح شده (اضافه کردن این بخش)
+// ==========================================================
+
+// با یک کوئری، تمام ویدیوهای دیده شده را بگیر
+$stmt = Config::db()->prepare("SELECT video_id FROM watched_videos WHERE user_id = ?");
+$stmt->execute([$userId]);
+// نتیجه را در یک آرایه ساده بریز تا چک کردن آن سریع باشد
+$watchedVideosMap = $stmt->fetchAll(PDO::FETCH_COLUMN); 
+
+// ==========================================================
+// END: کد اصلاح شده
+// ==========================================================
+
+
 $completion_percentage = $total_videos > 0 ? round(($watched_count / $total_videos) * 100) : 0;
 $remaining_videos = $total_videos - $watched_count;
 $estimated_hours = $remaining_videos > 0 ? ceil($remaining_videos * 15 / 60) : 0;
@@ -46,7 +61,6 @@ $active_exams = $stmt->fetchColumn();
 
 <div class="space-y-6 max-w-5xl mx-auto">
 
-    <!-- کارت اصلی پروفایل -->
     <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl shadow-2xl p-8 text-white">
         <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
             <div class="relative">
@@ -77,7 +91,6 @@ $active_exams = $stmt->fetchColumn();
         </div>
     </div>
 
-    <!-- آمار کلی -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div class="glass-card rounded-xl p-6 text-center hover:scale-105 transition">
             <div class="w-16 h-16 bg-blue-500 rounded-full mx-auto mb-3 flex items-center justify-center">
@@ -120,7 +133,6 @@ $active_exams = $stmt->fetchColumn();
         </div>
     </div>
 
-    <!-- نوار پیشرفت -->
     <div class="glass-card rounded-xl p-6">
         <div class="flex justify-between items-center mb-4">
             <h3 class="text-xl font-bold">پیشرفت کلی دوره</h3>
@@ -137,7 +149,6 @@ $active_exams = $stmt->fetchColumn();
         <?php endif; ?>
     </div>
 
-    <!-- پیشرفت دسته‌بندی‌ها -->
     <?php if (!empty($content)): ?>
         <div class="glass-card rounded-xl p-6">
             <h3 class="text-xl font-bold mb-6">پیشرفت به تفکیک دسته‌بندی</h3>
@@ -145,11 +156,21 @@ $active_exams = $stmt->fetchColumn();
                 <?php foreach ($content as $cat):
                     $cat_total = count($cat['videos'] ?? []);
                     $cat_watched = 0;
+                    
+                    // ==========================================================
+                    // START: کد اصلاح شده
+                    // ==========================================================
+                    
+                    // به جای کوئری در حلقه، در آرایه جستجو کن
                     foreach ($cat['videos'] as $v) {
-                        $stmt = Config::db()->prepare("SELECT 1 FROM watched_videos WHERE user_id = ? AND video_id = ?");
-                        $stmt->execute([$userId, $v['id']]);
-                        if ($stmt->fetch()) $cat_watched++;
+                        if (in_array($v['id'], $watchedVideosMap)) {
+                            $cat_watched++;
+                        }
                     }
+                    // ==========================================================
+                    // END: کد اصلاح شده
+                    // ==========================================================
+                    
                     $cat_perc = $cat_total > 0 ? round($cat_watched / $cat_total * 100) : 0;
                 ?>
                     <div>
@@ -167,7 +188,6 @@ $active_exams = $stmt->fetchColumn();
         </div>
     <?php endif; ?>
 
-    <!-- پیام انگیزشی -->
     <?php if ($completion_percentage < 100): ?>
         <div class="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl p-8 text-white text-center">
             <h3 class="text-3xl font-black mb-3">ادامه بده قهرمان! 💪</h3>

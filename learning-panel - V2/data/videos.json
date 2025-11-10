@@ -1,0 +1,24 @@
+{
+  "A": [
+    {
+      "categoryTitle": "مبانی پایتون برای گروه الف",
+      "videos": [
+        { "id": "a_py_1", "title": "آشنایی با پایتون", "duration": "۱۰:۳۲", "thumbnailUrl": "https://placehold.co/400x225/555/FFF?text=Python+Intro", "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
+        { "id": "a_py_2", "title": "متغیرها و انواع داده", "duration": "۱۲:۴۵", "thumbnailUrl": "https://placehold.co/400x225/555/FFF?text=Variables", "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+        { "id": "a_py_3", "title": "دستورات شرطی", "duration": "۱۵:۱۰", "thumbnailUrl": "https://placehold.co/400x225/555/FFF?text=Conditions", "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
+        { "id": "a_py_4", "title": "حلقه‌ها در پایتون", "duration": "۱۸:۰۵", "thumbnailUrl": "https://placehold.co/400x225/555/FFF?text=Loops", "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" }
+      ]
+    }
+  ],
+  "B": [
+    {
+      "categoryTitle": "مبانی پایتون گروه ب",
+      "videos": [
+        { "id": "a_py_1", "title": "آشنایی با پایتون", "duration": "۱۰:۳۲", "thumbnailUrl": "https://placehold.co/400x225/555/FFF?text=Python+Intro", "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
+        { "id": "a_py_2", "title": "متغیرها و انواع داده", "duration": "۱۲:۴۵", "thumbnailUrl": "https://placehold.co/400x225/555/FFF?text=Variables", "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+        { "id": "a_py_3", "title": "دستورات شرطی", "duration": "۱۵:۱۰", "thumbnailUrl": "https://placehold.co/400x225/555/FFF?text=Conditions", "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
+        { "id": "a_py_4", "title": "حلقه‌ها در پایتون", "duration": "۱۸:۰۵", "thumbnailUrl": "https://placehold.co/400x225/555/FFF?text=Loops", "videoUrl": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" }
+      ]
+    }
+  ]
+}

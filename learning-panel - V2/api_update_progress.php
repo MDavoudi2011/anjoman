@@ -76,7 +76,11 @@ if (!$alreadyWatched) {
     }
 }
 
-// محاسبه آمار پیشرفت
+// ==========================================================
+// START: کد اصلاح شده
+// ==========================================================
+
+// محاسبه آمار پیشرفت (با خواندن مستقیم از دیتابیس)
 $stmt = $pdo->prepare("
     SELECT COUNT(*) as total 
     FROM videos v 
@@ -84,10 +88,19 @@ $stmt = $pdo->prepare("
     WHERE vc.group_name = ?
 ");
 $stmt->execute([$userGroup]);
-$totalVideos = $stmt->fetchColumn();
+$totalVideos = (int)$stmt->fetchColumn(); // تبدیل به عدد
 
-$watchedCount = count($_SESSION['user']['watchedVideos']);
+// این خط مهم‌ترین تغییر است: شمارش مستقیم از دیتابیس
+$stmt = $pdo->prepare("SELECT COUNT(*) FROM watched_videos WHERE user_id = ?");
+$stmt->execute([$userId]);
+$watchedCount = (int)$stmt->fetchColumn(); // تبدیل به عدد
+
 $completionPercentage = $totalVideos > 0 ? round(($watchedCount / $totalVideos) * 100) : 0;
+
+// ==========================================================
+// END: کد اصلاح شده
+// ==========================================================
+
 
 // پاسخ نهایی
 echo json_encode([
@@ -95,7 +108,7 @@ echo json_encode([
     'message' => $alreadyWatched ? 'قبلاً دیده شده' : 'با موفقیت ثبت شد',
     'data' => [
         'videoId' => $videoId,
-        'totalVideos' => (int)$totalVideos,
+        'totalVideos' => $totalVideos,
         'watchedCount' => $watchedCount,
         'completionPercentage' => $completionPercentage,
         'alreadyWatched' => $alreadyWatched
