@@ -57,16 +57,32 @@ try {
     $total_students = $pending_exercises = $pending_exams = $active_exams = 0;
 }
 
-// --- پردازش تصحیح تمرین ---
 if ($_POST['action'] ?? '' === 'grade_exercise') {
     $sub_id = (int)($_POST['submission_id'] ?? 0);
     $status = $_POST['status'] === 'approved' ? 'approved' : 'rejected';
     $comment = trim($_POST['comment'] ?? '');
 
-    $stmt = $pdo->prepare("UPDATE exercise_submissions SET status = ?, mentor_comment = ?, reviewed_at = NOW() WHERE id = ? AND status = 'pending'");
-    $stmt->execute([$status, $comment, $sub_id]);
+    try {
+        $stmt = $pdo->prepare("UPDATE exercise_submissions SET status = ?, mentor_comment = ?, reviewed_at = NOW() WHERE id = ? AND status = 'pending'");
+        $stmt->execute([$status, $comment, $sub_id]);
 
-    echo "<script>alert('تمرین با موفقیت تصحیح شد!'); location.reload();</script>";
+        // --- فیکس شماره ۱: بررسی اینکه آیا ردیفی واقعا آپدیت شد؟ ---
+        if ($stmt->rowCount() > 0) {
+            $message = 'تمرین با موفقیت تصحیح شد!';
+        } else {
+            $message = 'خطا: این تمرین قبلاً تصحیح شده یا یافت نشد.';
+        }
+    } catch (Exception $e) {
+        $message = 'خطای پایگاه داده: ' . $e->getMessage();
+    }
+
+    // --- فیکس شماره ۲: استفاده از location.replace و خروج از اسکریپت ---
+    // (location.replace بهتر از reload است چون از هشدار resubmit فرم جلوگیری می‌کند)
+    echo "<script>
+            alert('" . addslashes($message) . "'); 
+            location.replace(location.pathname + location.search);
+          </script>";
+    exit; // بسیار مهم: از رندر شدن بقیه صفحه جلوگیری می‌کند
 }
 
 // --- پردازش تصحیح آزمون ---
@@ -75,10 +91,26 @@ if ($_POST['action'] ?? '' === 'grade_exam') {
     $score = (int)($_POST['score'] ?? 0);
     $comment = trim($_POST['exam_comment'] ?? '');
 
-    $stmt = $pdo->prepare("UPDATE exam_submissions SET status = 'graded', score = ?, mentor_comment = ?, reviewed_at = NOW() WHERE id = ? AND status = 'submitted'");
-    $stmt->execute([$score, $comment, $sub_id]);
+    try {
+        $stmt = $pdo->prepare("UPDATE exam_submissions SET status = 'graded', score = ?, mentor_comment = ?, reviewed_at = NOW() WHERE id = ? AND status = 'submitted'");
+        $stmt->execute([$score, $comment, $sub_id]);
 
-    echo "<script>alert('آزمون با موفقیت نمره‌دهی شد!'); location.reload();</script>";
+        // --- فیکس شماره ۱: بررسی اینکه آیا ردیفی واقعا آپدیت شد؟ ---
+        if ($stmt->rowCount() > 0) {
+            $message = 'آزمون با موفقیت نمره‌دهی شد!';
+        } else {
+            $message = 'خطا: این آزمون قبلاً نمره‌دهی شده یا یافت نشد.';
+        }
+    } catch (Exception $e) {
+        $message = 'خطای پایگاه داده: ' . $e->getMessage();
+    }
+
+    // --- فیکس شماره ۲: استفاده از location.replace و خروج از اسکریپت ---
+    echo "<script>
+            alert('" . addslashes($message) . "'); 
+            location.replace(location.pathname + location.search);
+          </script>";
+    exit; // بسیار مهم
 }
 ?>
 

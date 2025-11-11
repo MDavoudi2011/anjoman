@@ -24,7 +24,7 @@ define('VIEWS_PATH', BASE_PATH . '/views');
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'bahonar3');
 define('DB_USER', 'root');
-define('DB_PASS', '0315324457Mm');
+define('DB_PASS', '');
 define('DB_CHARSET', 'utf8mb4');
 
 // تنظیمات Session
