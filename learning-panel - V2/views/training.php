@@ -77,9 +77,27 @@ $completion_percentage = $progress['percentage'];
                 </div>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <?php foreach ($category['videos'] as $video):
-                        $is_watched = in_array($video['id'], $watchedVideos);
-                    ?>
+                    
+                    
+                <?php
+// --- شروع کد اصلاح شده ---
+// کپی کردن آرایه ویدئوها
+$videos_in_category = $category['videos']; 
+
+// مرتب‌سازی آرایه بر اساس 'id' (سازگار با PHP 5.x به بالا)
+usort($videos_in_category, function($a, $b) {
+    if ($a['id'] == $b['id']) {
+        return 0;
+    }
+    // مرتب‌سازی صعودی (از کم به زیاد)
+    return ($a['id'] < $b['id']) ? -1 : 1; 
+});
+// --- پایان کد اصلاح شده ---
+
+// حالا از آرایه مرتب شده $videos_in_category در حلقه استفاده می‌کنیم
+foreach ($videos_in_category as $video):
+    $is_watched = in_array($video['id'], $watchedVideos);
+?>
                         <div class="glass-card rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 cursor-pointer group overflow-hidden"
                              data-open-video-modal
                              data-id="<?php echo htmlspecialchars($video['id']); ?>"

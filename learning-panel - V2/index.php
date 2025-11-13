@@ -98,8 +98,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </svg>
             </div>
             <h1 class="text-4xl font-black text-white mb-2">انجمن برنامه‌نویسی</h1>
-            <h2 class="text-2xl font-bold text-white opacity-90">باهنر ۳</h2>
-            <p class="text-white opacity-75 mt-2">پلتفرم آموزش و پیشرفت</p>
+            <h2 class="text-2xl font-bold text-white opacity-90">دبیرستان شهید باهنر ۳ کرج</h2>
+            <p class="text-white opacity-75 mt-2">پلتفرم آموزشی انجمن برنامه نویسی</p>
         </div>
 
         <div class="glass-effect rounded-3xl shadow-2xl p-8 backdrop-blur-lg">
@@ -146,8 +146,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <div class="text-center mt-6 text-white text-sm opacity-75">
-            <p>تمامی حقوق برای محمد داوودی و محمدامین مدنی محمدی محفوظ است</p>
-            <p class="mt-1">© 2025 انجمن برنامه‌نویسی باهنر</p>
+            <p>تمامی حقوق برای محمد داودی و محمدامین مدنی محمدی محفوظ است</p>
+            <p class="mt-1"> انجمن برنامه‌نویسی دبیرستان باهنر ۳</p>
         </div>
     </div>
 </body>

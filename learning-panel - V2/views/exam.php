@@ -1,127 +1,73 @@
-<?php
-if (!isset($user) || !isset($user['username'])) {
-    header("Location: login.php");
-    exit;
-}
-$currentUser = Config::getUser($user['username']);
-$userGroup = $currentUser['user_group'];
-?>
 
-<div class="max-w-4xl mx-auto p-6">
-    <div id="exam-loading" class="text-center py-20">
-        <div class="text-2xl font-bold">در حال بارگذاری آزمون...</div>
-    </div>
-
-    <div id="exam-container" class="hidden space-y-8"></div>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', async () => {
-    const container = document.getElementById('exam-container');
-    const loading = document.getElementById('exam-loading');
-
-    const res = await fetch('exam_api.php?action=get_exam');
-    const data = await res.json();
-
-    if (!data.success) {
-        loading.innerHTML = `<div class="glass-card p-12 text-center"><h2 class="text-3xl font-black mb-4">آزمونی فعال نیست</h2><p>${data.message}</p></div>`;
-        return;
-    }
-
-    const exam = data.exam;
-    loading.classList.add('hidden');
-    container.classList.remove('hidden');
-
-    let seconds = exam.duration * 60;
-    const timerEl = `<div class="text-4xl font-bold text-red-600 text-center mb-8" id="timer">00:${String(exam.duration).padStart(2, '0')}:00</div>`;
-
-    container.innerHTML = `
-        <div class="bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl p-8 text-white text-center">
-            <h1 class="text-4xl font-black mb-3">${exam.title}</h1>
-            <p class="text-xl">${exam.description || ''}</p>
-        </div>
-        ${timerEl}
-        <form id="exam-form">
-            <input type="hidden" name="exam_id" value="${exam.id}">
-            <div class="glass-card rounded-2xl p-8 space-y-10">
-                ${exam.questions.map((q, i) => `
-                    <div class="border-b pb-8 last:border-0">
-                        <div class="flex gap-4">
-                            <span class="text-2xl font-black text-purple-600">${i + 1}</span>
-                            <div class="flex-1">
-                                <h3 class="text-xl font-bold mb-6">${q.question}</h3>
-                                ${q.type === 'multiple' ? q.options.map(opt => `
-                                    <label class="flex items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg mb-3 cursor-pointer hover:bg-gray-100">
-                                        <input type="radio" name="q${q.id}" value="${opt}" class="w-5 h-5 text-purple-600">
-                                        <span class="mr-3">${opt}</span>
-                                    </label>
-                                `).join('') : `
-                                    <textarea name="q${q.id}" rows="5" class="w-full p-4 border rounded-lg" placeholder="پاسخ خود را بنویسید..."></textarea>
-                                `}
+<div class="animate-fade-in-up max-w-3xl mx-auto">
+        <div class="glass-card rounded-xl shadow-lg p-8 text-center">
+                    <div class="relative inline-block mb-6">
+                        <div class="w-24 h-24 bg-gradient-to-br from-gray-400 to-gray-500 rounded-full flex items-center justify-center shadow-xl">
+                            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div class="absolute -bottom-1 -right-1 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center border-4 border-white dark:border-gray-800">
+                            <svg class="w-4 h-4 text-yellow-900" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-2xl font-black text-gray-800 dark:text-white mb-4">آزمونی فعال نیست</h3>
+                    <p class="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-md mx-auto"><?php echo htmlspecialchars($test_data['message']); ?></p>
+                    
+                    <!-- اطلاعات اضافی -->
+                    <div class="mt-8 p-6 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-xl">
+                        <div class="flex items-start text-right">
+                            <svg class="w-6 h-6 text-blue-600 dark:text-blue-400 ml-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <h4 class="font-bold text-gray-800 dark:text-white mb-2">نکات مهم:</h4>
+                                <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1 list-disc list-inside">
+                                    <li>آزمون‌ها به صورت دوره‌ای فعال می‌شوند</li>
+                                    <li>زمان دقیق برگزاری از طریق اعلان اطلاع‌رسانی می‌شود</li>
+                                    <li>برای آمادگی بهتر، دوره‌های آموزشی را کامل کنید</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                `).join('')}
-            </div>
-            <div class="flex gap-4 justify-center mt-10">
-                <button type="button" id="save-btn" class="px-8 py-4 bg-gray-600 text-white font-bold rounded-xl">ذخیره موقت</button>
-                <button type="submit" class="px-10 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-black rounded-xl text-xl">تحویل آزمون</button>
-            </div>
-        </form>
-    `;
+                </div>
 
-    // شروع آزمون
-    await fetch('exam_api.php?action=start', { method: 'POST', body: new FormData(document.getElementById('exam-form')) });
+                <br>
 
-    // بارگذاری پاسخ‌های قبلی
-    const ansRes = await fetch(`exam_api.php?action=get_answers&exam_id=${exam.id}`);
-    const ansData = await ansRes.json();
-    if (ansData.answers) {
-        Object.keys(ansData.answers).forEach(key => {
-            const el = document.querySelector(`[name="${key}"]`);
-            if (el) {
-                if (el.type === 'radio') {
-                    document.querySelector(`[name="${key}"][value="${ansData.answers[key]}"]`)?.setAttribute('checked', true);
-                } else {
-                    el.value = ansData.answers[key];
-                }
-            }
-        });
-    }
+                <!-- کارت‌های راهنما -->
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="glass-card rounded-xl p-6 text-center hover:shadow-lg transition-all">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-gray-800 dark:text-white text-sm mb-1">مطالعه محتوا</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">دوره‌های آموزشی را مطالعه کنید</p>
+                    </div>
 
-    // تایمر
-    const timer = setInterval(() => {
-        seconds--;
-        const m = Math.floor(seconds / 60);
-        const s = seconds % 60;
-        document.getElementById('timer').textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-        if (seconds <= 0) {
-            clearInterval(timer);
-            alert('زمان تمام شد!');
-            document.querySelector('#exam-form').requestSubmit();
-        }
-    }, 1000);
+                    <div class="glass-card rounded-xl p-6 text-center hover:shadow-lg transition-all">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-gray-800 dark:text-white text-sm mb-1">حل تمرین‌ها</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">چالش‌های تمرینی را انجام دهید</p>
+                    </div>
 
-    // ذخیره موقت
-    document.getElementById('save-btn').onclick = async () => {
-        const fd = new FormData(document.getElementById('exam-form'));
-        fd.append('action', 'save');
-        fd.append('answers', JSON.stringify(Object.fromEntries(fd)));
-        await fetch('exam_api.php', { method: 'POST', body: fd });
-        alert('ذخیره شد!');
-    };
+                    <div class="glass-card rounded-xl p-6 text-center hover:shadow-lg transition-all">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-gray-800 dark:text-white text-sm mb-1">آماده باشید</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">منتظر اعلام زمان آزمون باشید</p>
+                    </div>
+                </div>
+        <div class="space-y-6">
 
-    // ارسال نهایی
-    document.getElementById('exam-form').onsubmit = async (e) => {
-        e.preventDefault();
-        if (!confirm('مطمئنی می‌خوای تحویل بدی؟')) return;
-        const fd = new FormData(e.target);
-        fd.append('action', 'submit');
-        await fetch('exam_api.php', { method: 'POST', body: fd });
-        alert('آزمون با موفقیت تحویل شد!');
-        location.reload();
-    };
-
-    window.onbeforeunload = () => "آزمون در حال انجام است!";
-});
-</script>
